@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}  <!--No static files currently, but included now to make use of CSS and JavaScript later-->
+<html>
+
+    <head>
+        <title>About Page</title>
+    </head>
+
+    <body>
+        <h1>This is the about page</h1>
+        <div>
+            <strong>{{ about_message }}</strong><br />
+        </div>
+        <div>
+            <a href='/recipes/'>Home</a><br />
+        </div>
+    </body>
+</html>
