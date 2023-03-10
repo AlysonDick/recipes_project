@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 
+{% extends 'recipes/base.html' %}
 {% load staticfiles %}
-<!--No static files currently, but included now to make use of CSS and JavaScript later-->
-<html>
 
-<head>
-    <title>Recipe Page</title>
-</head>
+{% block title_block %}
+    Recipe Page
+{% endblock %}
 
-<body>
+{% block body_block %}
     <h1>Recipe Name</h1>
-
     <div style="display: flex;"> 
         <div style="width: 80%; margin-left: 2%; display: flex; background-color: gray; border: 1px solid black;">
             <div style="width: 40%; margin-right: 10%;">
-                <img src="recipe-photo.jpg" alt="Recipe photo" style="max-width: 100%;">
+                
+                <img src="{% static 'images/pasta.jpg' %}"alt="Picture of Recipe" />
                 <ul style="list-style: none; padding-left: 0;">
                     <li>Ingredient 1</li>
                     <li>Ingredient 2</li>
                     <li>Ingredient 3</li>
                 </ul>
             </div>
+            
             <div style="width: 50%;">
                 <ol style="list-style: decimal; padding-left: 1em;">
                     <li>Step 1</li>
@@ -35,13 +35,9 @@
             <button>Dislike</button>
         </div>
     </div>
-
-    <div
-        style="width: 80%; margin-left: 2%; margin-top: 10px; display: flex; flex-direction: column; background-color: whitesmoke; border: 1px solid black;">
+    
+    <div style="width: 80%; margin-left: 2%; margin-top: 10px; display: flex; flex-direction: column; background-color: whitesmoke; border: 1px solid black;">
         <h2 style="margin-top: 0;">Comments</h2>
-        <input type="text" id="comment" name="comment" style="width: 20%; margin-left: 2%; margin-bottom: 2%;"
-            placeholder="Leave a comment...">
+        <input type="text" id="comment" name="comment" style="width: 20%; margin-left: 2%; margin-bottom: 2%;"placeholder="Leave a comment...">
     </div>
-</body>
-
-</html>
+{% endblock %}
