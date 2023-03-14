@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}  <!--No static files currently, but included now to make use of CSS and JavaScript later-->
+<html>
+
+    <head>
+        <title>Create Recipe Page</title>
+    </head>
+
+    <body>
+        <h1>This is the create a recipe page</h1>
+        <div>
+            <form id='recipe_form' method='post' action='/recipes/create_recipe/''>
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type='submit' name='submit' value='Create Recipe' />
+            </form>
+        </div>
+        <div>
+            <a href='/recipes/'>Home</a><br />
+        </div>
+    </body>
+</html>
