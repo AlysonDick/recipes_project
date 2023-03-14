@@ -10,7 +10,11 @@ def home(request):
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
     return render(request, 'recipes/home.html', context=context_dict)
 
-def my_account(request):
+def my_account(request): #pass url parameter for slug:
+    #UserProfile = UserProfile.objects.filter(url=url_parameter)
+    #User = UserProfile[0].user()
+    #Recipes = Recipes.objects.filter(user=User)
+    #returns a list of recipes that you can put inside the context dictionary
     context_dict = {'my_account_message' : 'Whatever is in my_account_message in my_account views.py'}
     return render(request, 'recipes/my_account.html', context=context_dict)
 
@@ -25,23 +29,6 @@ def faq(request):
 def about(request):
     context_dict = {'about_message' : 'Whatever is in about_message in my_account views.py'}
     return render(request, 'recipes/about.html', context=context_dict)
-
-
-@login_required
-def create_recipe(request):
-    form = RecipeForm(request.POST)
-
-    if form.is_valid():
-        user_recipe = request.user
-        recipe_form = form.save(commit=False)
-        recipe_form.User = user_recipe
-        form.save()
-        return redirect('recipes/my_account.html')
-    
-    else:
-        print(form.errors)
-    
-    return render(request, 'recipes/create_recipe.html',  {'form': form})
 
 def register(request):
     registered = False
@@ -82,8 +69,9 @@ def login_user(request):
         user = authenticate(username=username, password=password)
 
         if user:
-            login(request, user)
-            return render(request, 'recipes/login.html')
+            if user.is_active:
+                login(request, user)
+                return render(request, 'recipes/my_account.html')
         
         else:
             return HttpResponse("Unable to login.")
@@ -95,3 +83,24 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return render(request, 'recipes/home.html')
+
+@login_required
+def create_recipe(request):
+    form = RecipeForm()
+    
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            #user_recipe = request.user
+            recipe_form = form.save(commit=False)
+            recipe_form.User = request.user
+            form.save()
+            return redirect('recipes/my_account.html')
+        else:
+            print(form.errors)
+    
+    else:
+        print(form.errors)
+    
+    return render(request, 'recipes/create_recipe.html',  {'form': form})
+
