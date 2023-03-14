@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}  <!--No static files currently, but included now to make use of CSS and JavaScript later-->
-<html>
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
 
-    <head>
-        <title>Create Recipe Page</title>
-    </head>
+{% block title_block %}
+    Create Recipe Page
+{% endblock %}
 
-    <body>
-        <h1>This is the create a recipe page</h1>
+
+{% block body_block %}
+<h1>This is the create a recipe page</h1>
         <div>
             <form id='recipe_form' method='post' action='/recipes/create_recipe/''>
                 {% csrf_token %}
@@ -23,5 +24,4 @@
         <div>
             <a href='/recipes/'>Home</a><br />
         </div>
-    </body>
-</html>
+{% endblock %}

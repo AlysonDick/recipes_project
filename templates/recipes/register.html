@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}  <!--No static files currently, but included now to make use of CSS and JavaScript later-->
-<html>
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
 
-    <head>
-        <title>Register Page</title>
-    </head>
+{% block title_block %}
+    Home
+{% endblock %}
 
-    <body>
-        <h1>This is the Register page</h1>
-        <div>
-        {% if registered %}
+
+{% block body_block %}
+    <h1>This is the Register page</h1>
+    <div>
+    {% if registered %}
         <h2>Registration complete</h2>
         <a href='/recipes/'>Home</a><br />
-        </div>
-
-        {% else %}
-        <h2>Register here</h2>
-        <form id="user_form" method="post" action="/recipes/register/" enctype="multipart/form-data">
+    </div>
+    {% else %}
+    <h2>Register here</h2>
+    <form id="user_form" method="post" action="/recipes/register/" enctype="multipart/form-data">
         {% csrf_token %}
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
         <input type="submit" name="submit" value="Register" />
-        </form>
-        {% endif %}
-    </body>
-</html>
+    </form>
+    {% endif %}
+{% endblock %}
+

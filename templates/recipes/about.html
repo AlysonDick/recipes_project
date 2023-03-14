@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}  <!--No static files currently, but included now to make use of CSS and JavaScript later-->
-<html>
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
 
-    <head>
-        <title>About Page</title>
-    </head>
+{% block title_block %}
+    About Page
+{% endblock %}
 
-    <body>
-        <h1>This is the about page</h1>
-        <div>
-            <strong>{{ about_message }}</strong><br />
-        </div>
-        <div>
-            <a href='/recipes/'>Home</a><br />
-        </div>
-    </body>
-</html>
+
+{% block body_block %}
+    <h1>This is the about page</h1>
+    <div>
+        <strong>{{ about_message }}</strong><br />
+    </div>
+    
+    <div>
+        <a href='/recipes/'>Home</a><br />
+    </div>
+{% endblock %}
+
