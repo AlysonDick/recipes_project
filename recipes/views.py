@@ -99,21 +99,22 @@ def logout_user(request):
 
 @login_required
 def create_recipe(request):
-    form = RecipeForm()
     
     if request.method == 'POST':
         form = RecipeForm(request.POST)
         if form.is_valid():
-            #user_recipe = request.user
-            recipe_form = form.save(commit=False)
-            recipe_form.User = request.user
+            #print(request.recipe_name)
+            rp = form.save(commit=False)
+            rp.User = request.user
             form.save()
+            
             return redirect('recipes/my_account.html')
         else:
             print(form.errors)
     
     else:
-        print(form.errors)
+        form = RecipeForm()
+
     
     return render(request, 'recipes/create_recipe.html',  {'form': form})
 
