@@ -20,7 +20,7 @@ class Category(models.Model):
         return self.category_name
     
 class Recipe(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     recipe_name = models.CharField(max_length=30, unique = True)
     like_count = models.IntegerField(default=0)
