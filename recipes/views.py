@@ -4,10 +4,19 @@ from recipes.forms import RecipeForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from recipes.bing_search import run_query
+from django.urls import reverse
 
 
 def home(request):
+    result_list=[]
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
+    #Search bar stuff
+    if request.method=='POST':
+        query=request.POST['query'].strip()
+        if query:
+            result_list=run_query(query)
+            return redirect(reverse('recipes:search',kwargs={'result_list':result_list}))
     return render(request, 'recipes/home.html', context=context_dict)
 
 def my_account(request): #pass url parameter for slug:
@@ -29,6 +38,10 @@ def faq(request):
 def about(request):
     context_dict = {'about_message' : 'Whatever is in about_message in my_account views.py'}
     return render(request, 'recipes/about.html', context=context_dict)
+
+def search(request, result_list):
+    context_dict={'result_list':result_list}
+    return render(request, 'recipes/search.html', context=context_dict)
 
 def register(request):
     registered = False
