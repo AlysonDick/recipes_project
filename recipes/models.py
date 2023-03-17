@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -26,7 +27,12 @@ class Recipe(models.Model):
     like_count = models.IntegerField(default=0)
     recipe_ingrediants = models.CharField(max_length=2000, default='') 
     recipe_steps = models.CharField(max_length=2000, default='') 
+    slug = models.SlugField(unique=True)
     #recipe_picture = models.ImageField(upload_to='recipe_images', null=True, blank=True,)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.recipe_name)
+        super(Recipe, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.recipe_name 

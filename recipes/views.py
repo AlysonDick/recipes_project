@@ -21,13 +21,11 @@ def home(request):
     return render(request, 'recipes/home.html', context=context_dict)
 
 
-def my_account(request): #pass url parameter for slug:
+def my_account(request): 
     user = request.user
     recipe_list = Recipe.objects.filter(user_id=user.id)
-    for recipe in recipe_list:
-        print(recipe)
     context_dict = {'recipe_list' : recipe_list}
-    return render(request, 'recipes/test.html', context=context_dict)
+    return render(request, 'recipes/my_account.html', context=context_dict)
 
 def recipes(request):
     context_dict = {'recipes_message' : 'Whatever is in recipes_message in my_account views.py'}
@@ -135,11 +133,16 @@ def create_comment(request):
 
     return render(request, 'recipes/recipes.html', {'form':form})
 
+def show_recipes(request, recipe_name_slug):
+    context_dict={}
+    recipe = Recipe.objects.get(slug=recipe_name_slug)
+    context_dict['recipe'] = recipe
 
+    return render(request, 'recipes/recipes_test.html', context=context_dict)
+    
 def test(request):
-    user = request.user
-    recipe_list = Recipe.objects.filter(user_id=user.id)
-    for recipe in recipe_list:
-        print(recipe)
+    recipe_list = Recipe.objects.all()
+    print(recipe_list)
     context_dict = {'recipe_list' : recipe_list}
+
     return render(request, 'recipes/test.html', context=context_dict)

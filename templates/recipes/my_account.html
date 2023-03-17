@@ -10,10 +10,12 @@
 
 {% block body_block %}
     <h1>This is the My Account page</h1>
-    <div>
-        <strong>{{ recipe_list }}</strong><br />
-    </div>
-    
+    <ul>
+        {% for recipe in recipe_list %}
+        <ul> {{ recipe.recipe_name }}</ul>
+        <ul> {{ recipe.category }}</ul>
+        {% endfor %}
+    </ul>
     <div>
         <a href='/recipes/'>Home</a><br />
     </div>
