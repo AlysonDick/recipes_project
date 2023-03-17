@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Test Page
+{% endblock %}
+
+
+{% block body_block %}
+    <h1>This is the about page</h1>
+    <div>
+        
+        <ul>
+            {% for recipe in recipe_list %}
+            <ul> {{ recipe.category }}</ul>
+            <ul> {{ recipe.recipe_name }}</ul>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div>
+        <a href='/recipes/'>Home</a><br />
+    </div>
+{% endblock %}

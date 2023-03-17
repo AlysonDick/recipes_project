@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from recipes.bing_search import run_query
 from django.urls import reverse
+from recipes.models import Recipe
 
 
 def home(request):
@@ -19,13 +20,14 @@ def home(request):
             return redirect(reverse('recipes:search',kwargs={'result_list':result_list}))
     return render(request, 'recipes/home.html', context=context_dict)
 
+
 def my_account(request): #pass url parameter for slug:
-    #UserProfile = UserProfile.objects.filter(url=url_parameter)
-    #User = UserProfile[0].user()
-    #Recipes = Recipes.objects.filter(user=User)
-    #returns a list of recipes that you can put inside the context dictionary
-    context_dict = {'my_account_message' : 'Whatever is in my_account_message in my_account views.py'}
-    return render(request, 'recipes/my_account.html', context=context_dict)
+    user = request.user
+    recipe_list = Recipe.objects.filter(user_id=user.id)
+    for recipe in recipe_list:
+        print(recipe)
+    context_dict = {'recipe_list' : recipe_list}
+    return render(request, 'recipes/test.html', context=context_dict)
 
 def recipes(request):
     context_dict = {'recipes_message' : 'Whatever is in recipes_message in my_account views.py'}
@@ -134,3 +136,10 @@ def create_comment(request):
     return render(request, 'recipes/recipes.html', {'form':form})
 
 
+def test(request):
+    user = request.user
+    recipe_list = Recipe.objects.filter(user_id=user.id)
+    for recipe in recipe_list:
+        print(recipe)
+    context_dict = {'recipe_list' : recipe_list}
+    return render(request, 'recipes/test.html', context=context_dict)
