@@ -1,5 +1,5 @@
 from django import forms
-from recipes.models import UserProfile, Recipe, Category
+from recipes.models import UserProfile, Recipe, Category, Comment
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -24,3 +24,12 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('category', 'recipe_name','recipe_ingrediants', 'recipe_steps',)# 'recipe_picture',)
+
+class CommentForm(forms.ModelForm):
+    user = forms.HiddenInput()
+    recipe = forms.ModelChoiceField(queryset=Recipe.objects.all())
+    comment_text = forms.CharField(max_length=500, help_text='Comment')
+
+    class Meta:
+        model = Comment
+        fields = ('recipe', 'comment_description',)

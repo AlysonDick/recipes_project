@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from recipes.forms import RecipeForm, UserForm, UserProfileForm
+from recipes.forms import RecipeForm, UserForm, UserProfileForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -116,4 +116,21 @@ def create_recipe(request):
 
     
     return render(request, 'recipes/create_recipe.html',  {'form': form})
+
+@login_required
+def create_comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            rp = form.save()
+
+            return redirect(reverse('recipes:recipes'))
+        
+        else:
+            print(form.errors)
+    else:
+        form = CommentForm()
+
+    return render(request, 'recipes/recipes.html', {'form':form})
+
 
