@@ -103,12 +103,11 @@ def create_recipe(request):
     if request.method == 'POST':
         form = RecipeForm(request.POST)
         if form.is_valid():
-            #print(request.recipe_name)
             rp = form.save(commit=False)
-            rp.User = request.user
+            rp.user = request.user
             form.save()
             
-            return redirect('recipes/my_account.html')
+            return redirect(reverse('recipes:my_account'))
         else:
             print(form.errors)
     

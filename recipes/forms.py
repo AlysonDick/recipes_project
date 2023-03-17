@@ -14,11 +14,13 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture',)
 
 class RecipeForm(forms.ModelForm):
-    #user = forms.ModelChoiceField(forms.HiddenInput)
+    user = forms.HiddenInput()
     category = forms.ModelChoiceField(queryset=Category.objects.all())
     recipe_name = forms.CharField(max_length=30, help_text="Recipe Name")
-    recipe_description = forms.CharField(max_length=2000, help_text="Recipe Description")
+    recipe_ingrediants = forms.CharField(max_length=2000, help_text="Ingrediants")
+    recipe_steps = forms.CharField(max_length=2000, help_text="Steps")
+    #recipe_picture = forms.ImageField(help_text="Recipe Picture")
 
     class Meta:
         model = Recipe
-        fields = ('category', 'recipe_name', 'recipe_description')
+        fields = ('category', 'recipe_name','recipe_ingrediants', 'recipe_steps',)# 'recipe_picture',)

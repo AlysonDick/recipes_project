@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class RecipeAdmin(admin.ModelAdmin):
     #list_display = ('user', 'category', 'recipe_ID', 'recipe_name', 'like_count', 'recipe_description')
-    list_display = ('user', 'category', 'recipe_name', 'like_count', 'recipe_description')
+    list_display = ('user', 'category', 'recipe_name', 'like_count', 'recipe_ingrediants', 'recipe_steps',)# 'recipe_picture',)
 
 class CommentAdmin(admin.ModelAdmin):
     #list_display = ('user', 'recipe', 'comment_ID', 'comment_date', 'comment_description')

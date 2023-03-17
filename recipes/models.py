@@ -24,8 +24,9 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     recipe_name = models.CharField(max_length=30, unique = True)
     like_count = models.IntegerField(default=0)
-    recipe_description = models.CharField(max_length=2000) 
-
+    recipe_ingrediants = models.CharField(max_length=2000, default='') 
+    recipe_steps = models.CharField(max_length=2000, default='') 
+    #recipe_picture = models.ImageField(upload_to='recipe_images', null=True, blank=True,)
 
     def __str__(self):
         return self.recipe_name 
