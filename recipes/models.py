@@ -21,7 +21,7 @@ class Category(models.Model):
     
 class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='uploaded_by')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     recipe_name = models.CharField(max_length=30, unique = True)
     like_count = models.IntegerField(default=0)
     recipe_ingrediants = models.CharField(max_length=2000, default='') 
