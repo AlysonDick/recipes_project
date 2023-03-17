@@ -84,7 +84,7 @@ def login_user(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return render(request, 'recipes/my_account.html')
+                return redirect(reverse('recipes:my_account'))
         
         else:
             return HttpResponse("Unable to login.")
@@ -95,7 +95,7 @@ def login_user(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return render(request, 'recipes/home.html')
+    return redirect(reverse('recipes:home'))
 
 @login_required
 def create_recipe(request):
