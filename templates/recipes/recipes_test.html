@@ -8,12 +8,9 @@
 {% endblock %}
 
 <div>
-<!-- <ul>{% for recipe in recipe_list %}
-    <li><a href="{{ recipe.url }}">{{ recipe.name }}</a></li>
-    {% endfor %}
-</ul>-->
 {% block body_block %}
 <p>{{ recipe.recipe_name }}</p>
+{{ recipe.recipe_ingredients }}
 There should be a recipe here  
  
 </div>

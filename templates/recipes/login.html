@@ -9,17 +9,36 @@
 
 
 {% block body_block %}
-    <h1>This is the Login page</h1>
-    
-    <div>
-        <form id='login_form' method='post' action='/recipes/login/'>
-            {% csrf_token %}
-            Username: <input type='text' name='username' value='' size='50' />
-            <br />
-            Password: <input type='password' name='password' value='' size='50' />
-            <br />
-            <input type='submit' value='submit' />
-        </form>    
-    </div>
-{% endblock %}
 
+    <div class = "row justify-content-center" style="height:100vh;">
+        <div class="col-md-6 text-center my-auto">
+            <main class="form-signin w-50 mx-auto my">
+                <form>
+                    <img class="mb-4" src="#" alt="logo" width="72" height="57">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                    
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+        
+          
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+                </form>
+            </main>
+        </div>
+    </div>
+
+
+
+{% endblock %}

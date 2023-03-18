@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='recipe',
-            name='recipe_ingrediants',
+            name='recipe_ingredients',
             field=models.CharField(default='', max_length=2000),
         ),
         migrations.AddField(
