@@ -9,7 +9,12 @@
 
 
 {% block body_block %}
-<h1>This is the create a recipe page</h1>
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="cover-container d-flex flex-column align-items-center justify-content-center p-3 mx-auto">
+        <header class="display-1 mx-auto align-items-center justify-content-center p-3">
+    Rate My Recipe
+  </header>
+<h1>Create a Recipe Here</h1>
         <div>
             <form id='recipe_form' method='post' action='/recipes/create_recipe/''>
                 {% csrf_token %}
@@ -20,5 +25,8 @@
                 {% endfor %}
                 <input type='submit' name='submit' value='Create Recipe' />
             </form>
+        </div>
+        <div>
+            <a href='/recipes/' class="btn btn-lg btn-light fw-bold border-white bg-white">Home</a><br />
         </div>
 {% endblock %}

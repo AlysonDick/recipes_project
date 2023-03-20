@@ -4,19 +4,83 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    My Account 
+    My Account
 {% endblock %}
 
 
 {% block body_block %}
-    <h1>This is the My Account page</h1>
-    <ul>
-        {% for recipe in recipe_list %}
-        <ul> {{ recipe.recipe_name }}</ul>
-        <ul> {{ recipe.category }}</ul>
-        {% endfor %}
-    </ul>
-    <div>
-        <a href='/recipes/'>Home</a><br />
+<div class="container-fluid py-4 mx-auto w-75">
+<div class="row align-items-md-stretch">
+    <div class="col-md-9 mt-1" style = "height: 300px">
+      <div class="p-5 mb-1 bg-light rounded-3">
+        <h1 class="display-5 fw-bold">Welcome, *******</h1>
+        <!-- Username
+    -NEED TO IMPLEMENT HOW TO GET USERNAME
+    -->
+
+        <p class="col-md-8 fs-4">Profile Description:</p>
+        <p>*******************************************************************************
+      *******************************************************************************
+    *******************************************************************************
+  *******************************************************************************
+*******************************************************************************</p>
+<ul>
+    {% for recipe in recipe_list %}
+    <ul> {{ recipe.recipe_name }}</ul>
+    <ul> {{ recipe.category }}</ul>
+    {% endfor %}
+</ul>
+<!--
+-NEED TO IMPLEMENT HOW TO GET USERS PROFILE DESCRIPTION
+-->
     </div>
+  </div>
+  <div class="col-md-3 mt-1" style = "height: 320px">
+    <div class="p-5 mb-1 bg-light rounded-3">
+            <img src = "{% static 'images/profile_pic.jpg' %}" class = "img-fluid" style = "width: 8rem">
+            <!-- Profile Picture
+   -NEED TO IMPLEMENT HOW TO GET PROFILE PICTURE
+   -->
+            <div class="badge bg-secondary text-wrap" style = "width: 8rem" >
+              Total likes: *** <!-- likes
+-NEED TO IMPLEMENT LIKE COUNTER here-->
+            </div>
+            <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Edit Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Links
+      -NEED TO IMPLEMENT FUNCTIONALITY FOR BUTTONS
+      -->
+      <div class="container-fluid py-4 mx-auto w-75">
+<div class="col-md-12">
+<div class="p-5 mb-1 bg-light rounded-3">
+<div class="list-group">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href='/recipes/create_recipe/'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">add_circle_outline</i></button></a>
+      <span style="font-size: 24px;">Add a Recipe
+    </li>
+    <li class="list-group-item">
+      <a href='/recipes/recipes/'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">view_carousel</i></button></a>
+      <span style="font-size: 24px;">View My Recipes
+    </li>
+    <li class="list-group-item">
+      <button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">save</i></button>
+      <span style="font-size: 24px;">Saved Recipes
+    </li>
+    <li class="list-group-item">
+      <button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">settings</i></button>
+      <span style="font-size: 24px;">Settings
+    </li>
+  </ul>
+</div>
+</div>
+</div>
+
 {% endblock %}
