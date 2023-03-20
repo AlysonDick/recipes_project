@@ -13,6 +13,9 @@
 
     <title>Rate My Recipe - {% block title_block %} Default title {% endblock %} </title>
 <style>
+.dropdown-toggle::after {
+  display: none;
+}
 .container {
   width: 100px;
   padding-top: 5px;
@@ -47,16 +50,16 @@ transform: translate(0, -11px) rotate(45deg);
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <div class="container" onclick="myFunction(this)">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <a class="btn nav-link dropdown-toggle btn-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
       </a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="{% url 'recipes:about' %}">About</a></li>
+        <li><a class="dropdown-item" href="{% url 'recipes:faq' %}">FAQ</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="{% url 'recipes:logout' %}">Logout</a></li>
       </ul>
     </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +68,7 @@ transform: translate(0, -11px) rotate(45deg);
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'recipes:home' %}">Home</a>
+                <a class="nav-link active" aria-current="page" href={% url 'recipes:home' %}>Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'recipes:login' %}">Login</a>
@@ -74,11 +77,7 @@ transform: translate(0, -11px) rotate(45deg);
                 <a class="nav-link" href="{% url 'recipes:recipes' %}">Recipes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'recipes:my_account' %}">My account</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a class="nav-link" href="{% url 'recipes:my_account' %}">My Account</a>
               </li>
             </ul>
             <form class="d-flex" role="search" method="post" id="user-form">
@@ -96,14 +95,6 @@ transform: translate(0, -11px) rotate(45deg);
       This is body_block's default content
       {% endblock %}
       </div>
-
-      <!--Code for the bottom navigation bar-->
-      <nav class="navbar fixed-bottom bg-body-tertiary">
-        <div class="container-fluid"  style="display: flex; justify-content: flex-start;">
-          <a class="navbar-brand " href="{% url 'recipes:about' %}">About</a>
-          <a class="navbar-brand " href="{% url 'recipes:faq' %}">FAQ</a>
-        </div>
-      </nav>
 
 
       <script>

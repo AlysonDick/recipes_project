@@ -16,12 +16,12 @@
         </header>
     <div>
     {% if registered %}
-        <h2>Registration complete</h2>
-        <a href='{% url "recipes:home" %}'>Home</a><br />
+        <h2>Registration Complete</h2>
+        <a href="{% url 'recipes:login' %}" class="w-100 btn btn-lg btn-primary">Log In</a><br />
     </div>
     {% else %}
-    <h2>Register here</h2>
-    <form id="user_form" method="post" action="/recipes/register/" enctype="multipart/form-data">
+    <h2>Register Here</h2>
+    <form id="user_form" method="post" action="{% url 'recipes:register' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
@@ -29,4 +29,3 @@
     </form>
     {% endif %}
 {% endblock %}
-

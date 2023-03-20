@@ -14,22 +14,21 @@
     <div class="col-md-9 mt-1" style = "height: 300px">
       <div class="p-5 mb-1 bg-light rounded-3">
         <h1 class="display-5 fw-bold">Welcome, {{ user.username }}</h1>
-        <!-- Username
-    -NEED TO IMPLEMENT HOW TO GET USERNAME
-    -->
 
         <p class="col-md-8 fs-4">Profile Description:</p>
-        {% for user in user_profile %} 
+        <p> {% for user in user_profile %} 
             {{ user.profile_description }}
-            {% endfor %}</p>
-
-<!--
--NEED TO IMPLEMENT HOW TO GET USERS PROFILE DESCRIPTION
--->
+            {% endfor %}</p></p>
+<ul>
+    {% for recipe in recipe_list %}
+    <ul> {{ recipe.recipe_name }}</ul>
+    <ul> {{ recipe.category }}</ul>
+    {% endfor %}
+</ul>
     </div>
   </div>
-  <div class="col-md-3 mt-1" style = "height: 320px">
-    <div class="p-5 mb-1 bg-light rounded-3">
+  <div class="col-md-3 mt-1">
+    <div class="p-5 mb-1 bg-light rounded-3" style = "height: 327px">
             <img src = "{% static 'images/profile_pic.jpg' %}" class = "img-fluid" style = "width: 8rem">
             <!-- Profile Picture
    -NEED TO IMPLEMENT HOW TO GET PROFILE PICTURE
@@ -56,11 +55,11 @@
 <div class="list-group">
   <ul class="list-group">
     <li class="list-group-item">
-      <a href='{% url "recipes:create_recipe" %}'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">add_circle_outline</i></button></a>
+      <a href="{% url 'recipes:create_recipe' %}"><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">add_circle_outline</i></button></a>
       <span style="font-size: 24px;">Add a Recipe
     </li>
     <li class="list-group-item">
-      <a href='{% url "recipes:recipes" %}'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">view_carousel</i></button></a>
+      <a href="{% url 'recipes:recipes' %}"><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">view_carousel</i></button></a>
       <span style="font-size: 24px;">View My Recipes
     </li>
     <li class="list-group-item">
