@@ -13,23 +13,16 @@
 <div class="row align-items-md-stretch">
     <div class="col-md-9 mt-1" style = "height: 300px">
       <div class="p-5 mb-1 bg-light rounded-3">
-        <h1 class="display-5 fw-bold">Welcome, *******</h1>
+        <h1 class="display-5 fw-bold">Welcome, {{ user.username }}</h1>
         <!-- Username
     -NEED TO IMPLEMENT HOW TO GET USERNAME
     -->
 
         <p class="col-md-8 fs-4">Profile Description:</p>
-        <p>*******************************************************************************
-      *******************************************************************************
-    *******************************************************************************
-  *******************************************************************************
-*******************************************************************************</p>
-<ul>
-    {% for recipe in recipe_list %}
-    <ul> {{ recipe.recipe_name }}</ul>
-    <ul> {{ recipe.category }}</ul>
-    {% endfor %}
-</ul>
+        {% for user in user_profile %} 
+            {{ user.profile_description }}
+            {% endfor %}</p>
+
 <!--
 -NEED TO IMPLEMENT HOW TO GET USERS PROFILE DESCRIPTION
 -->

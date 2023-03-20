@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_description = models.CharField(max_length=500, default='') 
     number_of_posts = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='profile_images', blank=True)
@@ -28,7 +29,6 @@ class Recipe(models.Model):
     recipe_ingredients = models.CharField(max_length=2000, default='') 
     recipe_steps = models.CharField(max_length=2000, default='') 
     slug = models.SlugField(unique=True)
-    #recipe_picture = models.ImageField(upload_to='recipe_images', null=True, blank=True,)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.recipe_name)

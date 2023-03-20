@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    profile_description = forms.CharField(max_length=500, help_text="Profile description - tell us about yourself here.")
     class Meta:
         model = User
-        fields = ('username', 'password',)
+        fields = ('username', 'password', 'profile_description')
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -19,11 +20,11 @@ class RecipeForm(forms.ModelForm):
     recipe_name = forms.CharField(max_length=30, help_text="Recipe Name")
     recipe_ingredients = forms.CharField(max_length=2000, help_text="Ingredients")
     recipe_steps = forms.CharField(max_length=2000, help_text="Steps")
-    #recipe_picture = forms.ImageField(help_text="Recipe Picture")
+
 
     class Meta:
         model = Recipe
-        fields = ('category', 'recipe_name','recipe_ingredients', 'recipe_steps',)# 'recipe_picture',)
+        fields = ('category', 'recipe_name','recipe_ingredients', 'recipe_steps',)
 
 class CommentForm(forms.ModelForm):
     user = forms.HiddenInput()

@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class RecipeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('recipe_name',)}
-    list_display = ('user', 'category', 'recipe_name', 'like_count', 'recipe_ingredients', 'recipe_steps', 'slug')# 'recipe_picture',)
+    list_display = ('user', 'category', 'recipe_name', 'like_count', 'recipe_ingredients', 'recipe_steps', 'slug')
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'recipe', 'comment_date', 'comment_description')
