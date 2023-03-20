@@ -17,7 +17,7 @@
     <div>
     {% if registered %}
         <h2>Registration complete</h2>
-        <a href='/recipes/'>Home</a><br />
+        <a href='{% url "recipes:home" %}'>Home</a><br />
     </div>
     {% else %}
     <h2>Register here</h2>

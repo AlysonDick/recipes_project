@@ -63,11 +63,11 @@
 <div class="list-group">
   <ul class="list-group">
     <li class="list-group-item">
-      <a href='/recipes/create_recipe/'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">add_circle_outline</i></button></a>
+      <a href='{% url "recipes:create_recipe" %}'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">add_circle_outline</i></button></a>
       <span style="font-size: 24px;">Add a Recipe
     </li>
     <li class="list-group-item">
-      <a href='/recipes/recipes/'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">view_carousel</i></button></a>
+      <a href='{% url "recipes:recipes" %}'><button type="button" class="btn btn-light"><i class="material-icons" style="font-size:36px">view_carousel</i></button></a>
       <span style="font-size: 24px;">View My Recipes
     </li>
     <li class="list-group-item">

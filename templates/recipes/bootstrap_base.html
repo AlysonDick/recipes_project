@@ -65,16 +65,16 @@ transform: translate(0, -11px) rotate(45deg);
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/recipes/">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'recipes:home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/recipes/login/">Login</a>
+                <a class="nav-link" href="{% url 'recipes:login' %}">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/recipes/recipes/">Recipes</a>
+                <a class="nav-link" href="{% url 'recipes:recipes' %}">Recipes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/recipes/my_account/">My account</a>
+                <a class="nav-link" href="{% url 'recipes:my_account' %}">My account</a>
               </li>
 
               <li class="nav-item">
@@ -100,8 +100,8 @@ transform: translate(0, -11px) rotate(45deg);
       <!--Code for the bottom navigation bar-->
       <nav class="navbar fixed-bottom bg-body-tertiary">
         <div class="container-fluid"  style="display: flex; justify-content: flex-start;">
-          <a class="navbar-brand " href="/recipes/about/">About</a>
-          <a class="navbar-brand " href="/recipes/faq/">FAQ</a>
+          <a class="navbar-brand " href="{% url 'recipes:about' %}">About</a>
+          <a class="navbar-brand " href="{% url 'recipes:faq' %}">FAQ</a>
         </div>
       </nav>
 
