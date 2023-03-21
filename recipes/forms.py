@@ -1,5 +1,5 @@
 from django import forms
-from recipes.models import UserProfile, Recipe, Category, Comment
+from recipes.models import UserProfile, Recipe, Category, Comment, SearchQuery
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -34,3 +34,11 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('recipe', 'comment_description',)
+
+class SearchQueryForm(forms.ModelForm):
+    form = forms.CharField(max_length=100, help_text="Find a Recipe")
+    
+    class Meta:
+        model = SearchQuery
+        fields = ('form',)
+

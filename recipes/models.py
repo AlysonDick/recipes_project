@@ -46,3 +46,10 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment_description
 
+class SearchQuery(models.Model):
+    query = models.CharField(max_length=100)
+    time = models.DateTimeField()
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.query

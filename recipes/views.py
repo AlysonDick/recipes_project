@@ -1,23 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from recipes.forms import RecipeForm, User, UserProfile, UserForm, UserProfileForm, CommentForm
+from recipes.forms import RecipeForm, User, UserProfile, UserForm, UserProfileForm, CommentForm, SearchQueryForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from recipes.bing_search import run_query
 from django.urls import reverse
-from recipes.models import Recipe
-
+from recipes.models import Recipe, SearchQuery
+import datetime
 
 def home(request):
-    result_list=[]
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
     #Search bar stuff
+    search_form=SearchQueryForm(request.POST)
     if request.method=='POST':
-        query=request.POST['query'].strip()
-        if query:
-            result_list=run_query(query)
-            return redirect(reverse('recipes:search',kwargs={'result_list':result_list}))
+        if search_form.is_valid():
+            f = search_form.save(commit=False)
+            f.time = datetime.now()
+            f.user = request.user
+            f.save(commit=True)
+            return redirect('recipes:search')
     return render(request, 'recipes/home.html', context=context_dict)
 
 
@@ -41,8 +43,15 @@ def about(request):
     context_dict = {'about_message' : 'Whatever is in about_message in my_account views.py'}
     return render(request, 'recipes/about.html', context=context_dict)
 
-def search(request, result_list):
-    context_dict={'result_list':result_list}
+def search(request):
+    sq=SearchQuery.models.filter(user=request.user).order_by('-time')
+    sqitem=sq[0]
+    validRecipes = []
+    recipesList = Recipe.objects.all()
+    for x in recipesList:
+        if sqitem in x:
+            validRecipes.append(x)
+    context_dict= {'results':validRecipes}
     return render(request, 'recipes/search.html', context=context_dict)
 
 def register(request):
