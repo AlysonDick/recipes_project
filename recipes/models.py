@@ -46,3 +46,9 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment_description
 
+class SearchQuery(models.Model):
+    query = models.CharField()
+    time = models.DateTimeField()
+    User = models.ForeignKey(User)
+    def __str__(self):
+        return self.query
