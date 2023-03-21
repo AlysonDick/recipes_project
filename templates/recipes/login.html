@@ -9,17 +9,40 @@
 
 
 {% block body_block %}
-    <h1>This is the Login page</h1>
-    
-    <div>
-        <form id='login_form' method='post' action='/recipes/login/'>
-            {% csrf_token %}
-            Username: <input type='text' name='username' value='' size='50' />
-            <br />
-            Password: <input type='password' name='password' value='' size='50' />
-            <br />
-            <input type='submit' value='submit' />
-        </form>    
-    </div>
-{% endblock %}
 
+<div class = "row justify-content-center" style="height:100vh;">
+<div class="col-md-6 text-center my-auto">
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="cover-container d-flex flex-column align-items-center justify-content-center p-3 mx-auto">
+        <header class="display-1 mx-auto align-items-center justify-content-center p-3">
+            Rate My Recipe
+        </header>
+            <main class="form-signin w-50 mx-auto my">
+                <form id='login_form' method='post' action="{% url 'recipes:login' %}">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                    <div class="form-floating">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name='username' value=''>
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name='password' value=''>
+                        <label for="floatingPassword">Password</label>
+                    </div>
+
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+                    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+                </form>
+            </main>
+        </div>
+    </div>
+
+
+
+{% endblock %}

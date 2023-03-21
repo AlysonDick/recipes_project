@@ -9,12 +9,97 @@
 
 
 {% block body_block %}
-    <h1>This is the FAQ page</h1>
-    <div>
-        <strong>{{ faq_message }}</strong><br />
+<div class="d-flex align-items-center p-3 my-3 text-black bg-light rounded shadow-sm">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-black lh-1" style="font-size: 2em;">Frequently Asked Questions</h1>
     </div>
-    
-    <div>
-        <a href='/recipes/'>Home</a><br />
+</div>
+
+<div class="accordion w-75" id="accordionPanelsStayOpenExample" style="margin: 0 auto;">
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          Do I need to create an account to use this site?
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body bg-light">
+          No you don't need to! However creating an account means that you can rate recipes and make and upload your own recipes.
+        </div>
+      </div>
     </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            How do I know when the recipe is done?
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body bg-light">
+            Follow the cooking time and temperature specified in the recipe. You can also check for doneness by inserting a toothpick or a fork into the thickest part of the food. If it comes out clean, the food is cooked through.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Can I double the recipe?
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+        <div class="accordion-body bg-light">
+            Yes, you can double the recipe. However, be sure to adjust the cooking time and use a larger cooking vessel if necessary.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            How do I store leftovers?
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+          <div class="accordion-body bg-light">
+            You can store leftovers in an airtight container in the refrigerator for up to three to four days, or in the freezer for longer storage
+          </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Can I substitute ingredients in a recipe?
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+          <div class="accordion-body bg-light">
+            Yes, in most cases you can substitute ingredients in a recipe. However, keep in mind that the end result may be different than the original recipe.
+          </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Can I adjust the serving size of a recipe?
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+          <div class="accordion-body bg-light">
+            Yes, you can adjust the serving size of a recipe by multiplying or dividing the ingredients accordingly. Keep in mind that adjusting the serving size may affect the cooking time and temperature, so make sure to make the necessary adjustments.
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-3">
+    <img src="{% static 'images/faqs.jpg' %}" class="d-block w-50 img-fluid mx-auto" alt="question marks">
+</div>
+
+
+
 {% endblock %}

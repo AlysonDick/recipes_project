@@ -9,13 +9,35 @@
 
 
 {% block body_block %}
-    <h1>This is the about page</h1>
-    <div>
-        <strong>{{ about_message }}</strong><br />
-    </div>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 fw-normal">About Rate My Recipe</h1>
+          <p class="lead fw-normal">Discover and share new recipes with our community of food lovers and amateur cooks. Browse our extensive collection of dishes submitted by fellow enthusiasts from around the globe, rate and review recipes to help others find the best meals, and share your own recipes and cooking tips. Whether you're a seasoned chef or a beginner,
+             our website has something for everyone. Join us on a culinary adventure and explore the world of cooking together!</p>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+      </div>
     
-    <div>
-        <a href='/recipes/'>Home</a><br />
-    </div>
+      <div class="d-flex flex-md-equal w-100 my-md-3 ps-md-3">
+        <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+          <div class="my-3 py-3">
+            <h2 class="display-5">Getting Started</h2>
+          </div>
+          <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+            <p style="color: black;">
+                If you're ready to start exploring our website, getting started is simple! To begin, navigate to the homepage and create an account by filling out the required information.
+                Although this is not required, once you've created an account, you can start browsing through our collection of recipes, or even upload your own. 
+            </p>
+
+            <a href="{% url 'recipes:register' %}" class="w-25 btn btn-lg btn-primary">Sign Up Here</a></p>
+        </div>
+        </div>
+        <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+            <img src="{% static 'images/cookbook.jpg' %}" class="d-block w-75 img-fluid mx-auto" alt="Picture of a cookbook">
+          </div>
+      </div>
+
 {% endblock %}
 

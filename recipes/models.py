@@ -4,12 +4,13 @@ from django.template.defaultfilters import slugify
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_description = models.CharField(max_length=500, default='') 
     number_of_posts = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-        return self.user.username #or self.user_ID
+        return self.user.username 
 
 class Category(models.Model):
     category_name = models.CharField(max_length=30, unique = True)
@@ -25,10 +26,9 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     recipe_name = models.CharField(max_length=30, unique = True)
     like_count = models.IntegerField(default=0)
-    recipe_ingrediants = models.CharField(max_length=2000, default='') 
+    recipe_ingredients = models.CharField(max_length=2000, default='') 
     recipe_steps = models.CharField(max_length=2000, default='') 
     slug = models.SlugField(unique=True)
-    #recipe_picture = models.ImageField(upload_to='recipe_images', null=True, blank=True,)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.recipe_name)
