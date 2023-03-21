@@ -52,15 +52,7 @@ def populate():
 
 def add_user(user):
     username = User.objects.get_or_create(username=user['username'])[0]
-    #print(username)
     username.save()
-    user_prof_description = UserProfile.objects.get_or_create(user=username)[0]
-    #user_prof_description = UserProfile.objects.values('profile_description')
-    user_prof_description = UserProfile.objects.update(profile_description=user['user_profile_description'])
-    #user_prof_description = UserProfile.objects.get_or_create(profile_description=user['user_profile_description'])
-    #print(username)
-    #print(user_prof_description, "PROFILE")
-    #username.save()
     return username
 
 def add_description(user):
@@ -68,7 +60,7 @@ def add_description(user):
     description = user['user_profile_description']
     user_profile = UserProfile.objects.get_or_create(user=username)[0]
     user_profile.profile_description = description
-    user_profile.save()
+    user_profile.save() 
     return user_profile
     
 

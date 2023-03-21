@@ -118,22 +118,6 @@ def create_recipe(request):
     
     return render(request, 'recipes/create_recipe.html',  {'form': form})
 
-@login_required
-def create_comment(request):
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            rp = form.save()
-
-            return redirect(reverse('recipes:recipes'))
-        
-        else:
-            print(form.errors)
-    else:
-        form = CommentForm()
-
-    return render(request, 'recipes/recipes.html', {'form':form})
-
 def show_recipes(request, recipe_name_slug):
     context_dict={}
     recipe = Recipe.objects.get(slug=recipe_name_slug)
