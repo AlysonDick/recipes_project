@@ -10,16 +10,16 @@ from recipes.models import Recipe, SearchQuery
 import datetime
 
 def home(request):
-    result_list=[]
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
     #Search bar stuff
-    form=SearchQueryForm(request.POST)
-    if form.is_valid():
-        f = form.save(commit=False)
-        f.time = datetime.now()
-        f.user = request.user
-        f.save(commit=True)
-        return redirect('recipes:search')
+    search_form=SearchQueryForm(request.POST)
+    if request.method=='POST':
+        if search_form.is_valid():
+            f = search_form.save(commit=False)
+            f.time = datetime.now()
+            f.user = request.user
+            f.save(commit=True)
+            return redirect('recipes:search')
     return render(request, 'recipes/home.html', context=context_dict)
 
 
@@ -46,9 +46,12 @@ def about(request):
 def search(request):
     sq=SearchQuery.models.filter(user=request.user).order_by('-time')
     sqitem=sq[0]
+    validRecipes = []
     recipesList = Recipe.objects.all()
-    
-    context_dict=0
+    for x in recipesList:
+        if sqitem in x:
+            validRecipes.append(x)
+    context_dict= {'results':validRecipes}
     return render(request, 'recipes/search.html', context=context_dict)
 
 def register(request):

@@ -36,8 +36,9 @@ class CommentForm(forms.ModelForm):
         fields = ('recipe', 'comment_description',)
 
 class SearchQueryForm(forms.ModelForm):
-    form = forms.CharField()
+    form = forms.CharField(max_length=100, help_text="Find a Recipe")
     
     class Meta:
         model = SearchQuery
+        fields = ('form',)
 
