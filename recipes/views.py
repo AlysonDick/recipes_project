@@ -63,7 +63,6 @@ def register(request):
                 profile.picture = request.FILES['picture']
             
             profile.save()
-            
             registered = True
         
         else:

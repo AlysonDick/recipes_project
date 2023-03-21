@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    profile_description = forms.CharField(max_length=500, help_text="Profile description - tell us about yourself here.")
     class Meta:
         model = User
-        fields = ('username', 'password', 'profile_description')
+        fields = ('username', 'password',)
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('picture',)
+        profile_description = forms.CharField(max_length=500, help_text="Profile description - tell us about yourself here.")
+        fields = ('picture', 'profile_description')
 
 class RecipeForm(forms.ModelForm):
     user = forms.HiddenInput()
