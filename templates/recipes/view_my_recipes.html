@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    View My Recipes 
+{% endblock %}
+
+
+{% block body_block %}
+{% for recipe in recipe_list %}
+<ul> {{ recipe.recipe_name }}</ul>
+<ul> {{ recipe.category }}</ul>
+<ul> {{ recipe.recipe_ingredients }}</ul>
+<ul> {{ recipe.recipe_steps }}</ul>
+{% endfor %}
+{% endblock %}

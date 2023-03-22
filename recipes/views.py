@@ -24,12 +24,18 @@ def home(request):
 
 
 def my_account(request): 
-    user = request.user
-    user_profile = UserProfile.objects.all()
-    user_profile = UserProfile.objects.filter(user=user)
-    recipe_list = Recipe.objects.filter(user_id=user.id)
-    context_dict = {'recipe_list' : recipe_list, 'user_profile':user_profile}
+    if request.user.is_authenticated:
+        user = request.user
+        user_profile = UserProfile.objects.all()
+        user_profile = UserProfile.objects.filter(user=user)
+        context_dict = {'user_profile':user_profile}
+
+    else:
+        #return HttpResponse("You can only view the My Account page if you are signed in. Please register or log in to view this page.")
+        return render(request, 'recipes/register.html',)
+    
     return render(request, 'recipes/my_account.html', context=context_dict)
+
 
 def recipes(request):
     context_dict = {'recipes_message' : 'Whatever is in recipes_message in my_account views.py'}
@@ -73,10 +79,6 @@ def register(request):
             
             profile.save()
             registered = True
-        
-        else:
-            print("there has been an error registering: ")
-            print(user_form.errors, profile_form.errors)
     
     else:
         user_form = UserForm()
@@ -109,7 +111,6 @@ def logout_user(request):
 
 @login_required
 def create_recipe(request):
-    
     if request.method == 'POST':
         form = RecipeForm(request.POST)
         if form.is_valid():
@@ -127,12 +128,21 @@ def create_recipe(request):
     
     return render(request, 'recipes/create_recipe.html',  {'form': form})
 
-def show_recipes(request, recipe_name_slug):
+def show_recipe(request, recipe_name_slug):
     context_dict={}
     recipe = Recipe.objects.get(slug=recipe_name_slug)
     context_dict['recipe'] = recipe
 
     return render(request, 'recipes/recipes_test.html', context=context_dict)
+
+def view_recipes(request):
+    user = request.user
+    user_profile = UserProfile.objects.all()
+    user_profile = UserProfile.objects.filter(user=user)
+    recipe_list = Recipe.objects.filter(user_id=user.id)
+    context_dict = {'recipe_list' : recipe_list, 'user_profile':user_profile}
+    
+    return render(request, 'recipes/view_my_recipes.html', context=context_dict)
     
 def test(request):
     recipe_list = Recipe.objects.all()
