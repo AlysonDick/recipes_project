@@ -15,7 +15,7 @@
     <div class="card-body">
       <h5 class="card-title"> {{ recipe.recipe_name }}</h5>
       <p class="card-text">This is an {{ recipe.category }} meal to make using {{ recipe.recipe_ingredients }}.</p>
-      <a href="#" class="card-link">Go to recipe</a>
+      <a href="{% url 'recipes:show_recipe' recipe.slug %}" class="card-link">Go to recipe</a>
     </div>
   </div>
 
