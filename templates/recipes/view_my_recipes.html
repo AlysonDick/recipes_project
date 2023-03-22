@@ -10,9 +10,15 @@
 
 {% block body_block %}
 {% for recipe in recipe_list %}
-<ul> {{ recipe.recipe_name }}</ul>
-<ul> {{ recipe.category }}</ul>
-<ul> {{ recipe.recipe_ingredients }}</ul>
-<ul> {{ recipe.recipe_steps }}</ul>
+
+<div class="card mb-3 mt-3 mx-auto p-3 w-75">
+    <div class="card-body">
+      <h5 class="card-title"> {{ recipe.recipe_name }}</h5>
+      <p class="card-text">This is an {{ recipe.category }} meal to make using {{ recipe.recipe_ingredients }}.</p>
+      <a href="#" class="card-link">Go to recipe</a>
+    </div>
+  </div>
+
+
 {% endfor %}
 {% endblock %}
