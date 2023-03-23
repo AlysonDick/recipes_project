@@ -7,15 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from recipes.bing_search import run_query
 from django.urls import reverse
-<<<<<<< HEAD
 from django.views.decorators.csrf import csrf_exempt
 from recipes.models import Recipe, Praise, Category
 
 
-=======
 from recipes.models import Recipe, SearchQuery
 import datetime
->>>>>>> b0e57656b08c5a366c699d2708ee6b0ff07f68a3
 
 def home(request):
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
