@@ -30,14 +30,14 @@ class ModelsTests(TestCase):
         #---THIS DOESNT WORK FOR SOME REASON. CHECK.
         success=False
         print("Test 4")
-        category = Category(category_name="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",)
         try:
+            category = Category(category_name="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",)
             category.save()
         except Exception as e:
             print(e)
             success=True
-        #self.assertTrue(success)
-        self.assertTrue(True)
+        self.assertTrue(success)
+        #self.assertTrue(True)
 
 class ViewsTests(TestCase):
     def test_AboutPageContextExists(self):

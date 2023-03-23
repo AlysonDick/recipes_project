@@ -13,12 +13,12 @@
 <div class="p-5 mb-1 bg-light rounded-3">
     <div class="container-fluid py-5">
       <h1 class="display-5 fw-bold">{{ recipe.recipe_name }}</h1>
-      <p class="col-md-8 fs-4">Below are photos the user has updatated of their recipe.</p>
+      <!-- <p class="col-md-8 fs-4">Below are photos the user has updatated of their recipe.</p> -->
 
       <!-- Carousel images 
     -NEED TO IMPLEMENT HOW TO GET IMAGES TO UPLOAD
     -->
-      <div id="carouselExampleDark" class="carousel carousel-dark slide">
+      <!-- <div id="carouselExampleDark" class="carousel carousel-dark slide">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -56,7 +56,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      
+       -->
     </div>
   </div>
 
@@ -75,7 +75,10 @@
     <div class="col-md-9 mt-1">
       <div class="h-100 p-5 bg-light border rounded-3">
         <h2>Steps</h2>
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <p>
+          {{ recipe.recipe_steps }}
+        </p>
+        <!-- <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -112,11 +115,16 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
- 
+ <div class="bg-light py-3 md-9 mt-2 px-5">
+
+            <button type="submit" class="btn btn-primary" style="margin-left: 85%" id="priase_btn"
+                    onclick="doPraise('{{ recipe.id }}', 0)">Priase
+            </button>
+        </div>
   <!-- Code for comments section 
 <div class="bg-light py-3 md-9 mt-2 px-5">
   <h3 class="px-2">Reviews</h3>
@@ -165,4 +173,35 @@
         <h2 style="margin-top: 0;">Comments</h2>
         <input type="text" id="comment" name="comment" style="width: 20%; margin-left: 2%; margin-bottom: 2%;"placeholder="Leave a comment...">
     </div> -->
+
+
+<script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script>
+        function doPraise(wid, mtype) {
+            if (wid == "") {
+                wid = "1"
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/recipes/do_praise',
+                data: JSON.stringify({"id": wid, "mtype": mtype}),
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data.status == "0") {
+                        alert("success!")
+                    } else {
+                        //服务器删除失败，提示错误信息，刷新页面
+                        alert(data.data)
+                    }
+                },
+                error: function (xhr) {
+                    //中间发生异常，查看xhr.responseText
+                    alert("fail")
+                }
+            });
+
+        }
+    </script>
+
 {% endblock %}

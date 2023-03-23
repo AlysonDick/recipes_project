@@ -1,5 +1,5 @@
 from django.contrib import admin
-from recipes.models import UserProfile, Category, Recipe, Comment
+from recipes.models import UserProfile, Category, Recipe, Comment, SearchQuery
 from django.contrib.auth.models import User
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,3 +17,4 @@ admin.site.register(UserProfile)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(SearchQuery)

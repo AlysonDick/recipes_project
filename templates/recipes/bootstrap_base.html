@@ -50,7 +50,7 @@
                 <a class="nav-link" href="{% url 'recipes:my_account' %}">My Account</a>
               </li>
             </ul>
-            <form class="d-flex" role="search" method="post" id="search_form" action="{% url 'recipes:search' %}">
+            <form class="d-flex" role="search" method="post" id="user-form" action="{% url 'recipes:search' %}">
               {% csrf_token %}
               <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" id="search_form">
               <button class="btn btn-outline-success" type="submit" name="submit"><i class="fa fa-search"></i></button>
