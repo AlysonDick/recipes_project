@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    View My Recipes 
+{% endblock %}
+
+
+{% block body_block %}
+{% for recipe in recipe_list %}
+
+<div class="card mb-3 mt-3 mx-auto p-3 w-75">
+    <div class="card-body">
+      <h5 class="card-title"> {{ recipe.recipe_name }}</h5>
+      <p class="card-text">This is an {{ recipe.category }} meal to make using {{ recipe.recipe_ingredients }}.</p>
+      <a href="{% url 'recipes:show_recipe' recipe.slug %}" class="card-link">Go to recipe</a>
+    </div>
+  </div>
+
+
+{% endfor %}
+{% endblock %}

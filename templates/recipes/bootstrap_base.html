@@ -7,41 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes_project/stylesheet.css' %}">
     <title>Rate My Recipe - {% block title_block %} Default title {% endblock %} </title>
-<style>
-.dropdown-toggle::after {
-  display: none;
-}
-.container {
-  width: 100px;
-  padding-top: 5px;
-  padding-left: 25px;
-display: inline-block;
-cursor: pointer;
-}
-
-.bar1, .bar2, .bar3 {
-width: 35px;
-height: 5px;
-background-color: #333;
-margin: 6px 0;
-transition: 0.4s;
-}
-
-.change .bar1 {
-transform: translate(0, 11px) rotate(-45deg);
-}
-
-.change .bar2 {opacity: 0;}
-
-.change .bar3 {
-transform: translate(0, -11px) rotate(45deg);
-}
-</style>
 </head>
 <body>
 
@@ -50,7 +20,7 @@ transform: translate(0, -11px) rotate(45deg);
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <div class="container" onclick="myFunction(this)">
-      <a class="btn nav-link dropdown-toggle btn-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
@@ -68,7 +38,7 @@ transform: translate(0, -11px) rotate(45deg);
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href={% url 'recipes:home' %}>Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'recipes:home' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'recipes:login' %}">Login</a>
@@ -82,7 +52,7 @@ transform: translate(0, -11px) rotate(45deg);
             </ul>
             <form class="d-flex" role="search" method="post" id="user-form">
               {% csrf_token %}
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+              <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" id="search_form">
               <button class="btn btn-outline-success" type="submit" name="submit"><i class="fa fa-search"></i></button>
             </form>
           </div>
@@ -96,12 +66,8 @@ transform: translate(0, -11px) rotate(45deg);
       {% endblock %}
       </div>
 
-
-      <script>
-      function myFunction(x) {
-      x.classList.toggle("change");
-      }
-      </script>
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </body>

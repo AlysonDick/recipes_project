@@ -47,6 +47,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment_description
 
+<<<<<<< HEAD
 
 class Praise(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -55,3 +56,12 @@ class Praise(models.Model):
     def __str__(self):
         return str(self.user) + "-"+ str(self.recipe)
 
+=======
+class SearchQuery(models.Model):
+    query = models.CharField(max_length=100)
+    time = models.DateTimeField()
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.query
+>>>>>>> b0e57656b08c5a366c699d2708ee6b0ff07f68a3
