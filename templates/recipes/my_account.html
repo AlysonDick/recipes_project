@@ -23,7 +23,9 @@
   </div>
   <div class="col-md-3 mt-1">
     <div class="p-5 mb-1 bg-light rounded-3" style = "height: 327px">
-            <img src = "{% static 'images/profile_pic.jpg' %}" class = "img-fluid" style = "width: 8rem">
+         {% if user.userprofile.picture %}
+            <img src = "{{ user.userprofile.picture.url }}" alt="{{ user.username }}'s Profile Picture" class = "img-fluid" style = "width: 8rem">
+         {% endif %}
             <!-- Profile Picture
    -NEED TO IMPLEMENT HOW TO GET PROFILE PICTURE
    -->
@@ -31,7 +33,7 @@
               Total likes: *** <!-- likes
 -NEED TO IMPLEMENT LIKE COUNTER here-->
             </div>
-            <a href="#" class="btn btn-lg btn-primary fw-bold">Edit Profile</a>
+            <a href="{% url 'recipes:edit_profile' %}" class="btn btn-lg btn-primary fw-bold">Edit Profile</a>
           </div>
         </div>
       </div>

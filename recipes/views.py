@@ -11,8 +11,6 @@ from recipes.bing_search import run_query
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from recipes.models import Recipe, Praise, Category
-
-
 from recipes.models import Recipe, SearchQuery
 import datetime
 
@@ -20,8 +18,7 @@ def home(request):
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
     return render(request, 'recipes/home.html', context=context_dict)
 
-
-def my_account(request): 
+def my_account(request):
     if request.user.is_authenticated:
         user = request.user
         user_profile = UserProfile.objects.all()
@@ -31,7 +28,7 @@ def my_account(request):
     else:
         #return HttpResponse("You can only view the My Account page if you are signed in. Please register or log in to view this page.")
         return render(request, 'recipes/register.html',)
-    
+
     return render(request, 'recipes/my_account.html', context=context_dict)
 
 
@@ -151,14 +148,14 @@ def register(request):
 
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-            
+
             profile.save()
             registered = True
-    
+
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
+
     return render(request, 'recipes/register.html', context = {'user_form':user_form, 'profile_form':profile_form, 'registered':registered})
 
 
@@ -172,10 +169,10 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('recipes:my_account'))
-        
+
         else:
             return HttpResponse("Unable to login.")
-    
+
     else:
         return render(request, 'recipes/login.html')
 
@@ -192,15 +189,14 @@ def create_recipe(request):
             rp = form.save(commit=False)
             rp.user = request.user
             form.save()
-            
+
             return redirect(reverse('recipes:my_account'))
         else:
             print(form.errors)
-    
+
     else:
         form = RecipeForm()
 
-    
     return render(request, 'recipes/create_recipe.html',  {'form': form})
 
 def show_recipe(request, recipe_name_slug):
@@ -216,12 +212,26 @@ def view_recipes(request):
     user_profile = UserProfile.objects.filter(user=user)
     recipe_list = Recipe.objects.filter(user_id=user.id)
     context_dict = {'recipe_list' : recipe_list, 'user_profile':user_profile}
-    
+
     return render(request, 'recipes/view_my_recipes.html', context=context_dict)
-    
+
 def test(request):
     recipe_list = Recipe.objects.all()
     print(recipe_list)
     context_dict = {'recipe_list' : recipe_list}
 
     return render(request, 'recipes/test.html', context=context_dict)
+
+def edit_profile(request):
+    user_profile = request.user.userprofile
+    if request.method == 'POST':
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if profile_form.is_valid():
+            user_profile = profile_form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            profile_form.save()
+            return redirect(reverse('recipes:my_account'))
+    else:
+        profile_form = UserProfileForm(instance=user_profile)
+    return render(request, 'recipes/edit_profile.html', context={'profile_form': profile_form})

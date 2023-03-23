@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/bootstrap_base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    My Account
+{% endblock %}
+
+
+{% block body_block %}
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="cover-container d-flex flex-column align-items-center justify-content-center p-3 mx-auto">
+        <header class="display-1 mx-auto align-items-center justify-content-center p-3">
+            Rate My Recipe
+        </header>
+<h2>Edit Profile</h2>
+
+  <form method="post" enctype="multipart/form-data" action="{% url 'recipes:edit_profile' %}">
+    {% csrf_token %}
+    {{ profile_form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
