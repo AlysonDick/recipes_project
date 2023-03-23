@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
 from recipes.forms import RecipeForm, User, UserProfile, UserForm, UserProfileForm, CommentForm
@@ -6,7 +7,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from recipes.bing_search import run_query
 from django.urls import reverse
-from recipes.models import Recipe
+from django.views.decorators.csrf import csrf_exempt
+from recipes.models import Recipe, Praise, Category
+
 
 
 def home(request):
@@ -32,6 +35,67 @@ def my_account(request):
 def recipes(request):
     context_dict = {'recipes_message' : 'Whatever is in recipes_message in my_account views.py'}
     return render(request, 'recipes/recipes.html', context=context_dict)
+
+@csrf_exempt
+def do_praise(request):
+    try:
+        user = request.user
+        if user.is_authenticated is False:
+            resp = {"status": "1", "data": "need login"}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+
+        datas = json.loads(request.body)
+        print(datas)
+        id = datas["id"]
+        mtype = datas["mtype"]
+        print(id)
+        print(mtype)
+        recipe = Recipe.objects.filter(id=id)
+        print(recipe)
+        if len(recipe) == 0:
+            # r = Recipe()
+            # ca = Category()
+            # ca.category_name = "food"
+            # ca.save()
+            # r.user=user
+            # r.category = ca
+            # r.recipe_name = "recipe1"
+            # r.save()
+            # recipe = r
+            resp = {"status": "2", "data": u"recipe had deleted"}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+        else:
+            recipe = recipe[0]
+        if mtype == 0:
+
+            old = Praise.objects.filter(user=user, recipe=recipe)
+            if len(old) > 0:
+                resp = {"status": "1", "data": u"you had praise"}
+                return HttpResponse(json.dumps(resp), content_type="application/json")
+            pr = Praise()
+            pr.user = user
+            pr.recipe = recipe
+            pr.save()
+
+            recipe.like_count = recipe.like_count + 1
+            recipe.save()
+        else:
+            old = Praise.objects.filter(user=user, recipe=recipe)
+            if len(old) == 0:
+                resp = {"status": "1", "data": u"no praise"}
+                return HttpResponse(json.dumps(resp), content_type="application/json")
+            for i in old:
+                i.delete()
+                i.recipe.like_count = i.recipe.like_count -1
+                i.recipe.save()
+
+        resp = {"status": "0", "data": u"success"}
+
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+    except Exception as e:
+        print(e)
+        resp = {"status": "3", "data": u"出错了"}
+        return HttpResponse(json.dumps(resp), content_type="application/json")
 
 def faq(request):
     context_dict = {'faq_message' : 'Whatever is in faq_message in my_account views.py'}

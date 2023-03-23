@@ -37,6 +37,7 @@ class Recipe(models.Model):
     def __str__(self):
         return self.recipe_name 
 
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
@@ -45,4 +46,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment_description
+
+
+class Praise(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return str(self.user) + "-"+ str(self.recipe)
 

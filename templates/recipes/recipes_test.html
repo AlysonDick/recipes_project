@@ -116,7 +116,12 @@
       </div>
     </div>
   </div>
- 
+ <div class="bg-light py-3 md-9 mt-2 px-5">
+
+            <button type="submit" class="btn btn-primary" style="margin-left: 85%" id="priase_btn"
+                    onclick="doPraise('{{ recipe.id }}', 0)">Priase
+            </button>
+        </div>
   <!-- Code for comments section 
 <div class="bg-light py-3 md-9 mt-2 px-5">
   <h3 class="px-2">Reviews</h3>
@@ -165,4 +170,35 @@
         <h2 style="margin-top: 0;">Comments</h2>
         <input type="text" id="comment" name="comment" style="width: 20%; margin-left: 2%; margin-bottom: 2%;"placeholder="Leave a comment...">
     </div> -->
+
+
+<script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script>
+        function doPraise(wid, mtype) {
+            if (wid == "") {
+                wid = "1"
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/recipes/do_praise',
+                data: JSON.stringify({"id": wid, "mtype": mtype}),
+                dataType: "json",
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data.status == "0") {
+                        alert("success!")
+                    } else {
+                        //服务器删除失败，提示错误信息，刷新页面
+                        alert(data.data)
+                    }
+                },
+                error: function (xhr) {
+                    //中间发生异常，查看xhr.responseText
+                    alert("fail")
+                }
+            });
+
+        }
+    </script>
+
 {% endblock %}
