@@ -16,6 +16,9 @@
         </header>
         <h3>This is the Home Page</h3>
         <p class="lead"><strong>{{ boldmessage }}</strong><br /></p>
+        {% for recipe in recipe_list %}
+        <ul> {{ recipe.recipe_name }} <a href="{% url 'recipes:show_recipe' recipe.slug %}" class="card-link">Go to recipe</a></ul>
+        {% endfor %}
         <p class="lead">
         <a href="{% url 'recipes:register' %}" class="w-100 btn btn-lg btn-primary">Sign Up</a></p>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>

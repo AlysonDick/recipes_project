@@ -15,15 +15,23 @@ from recipes.models import Recipe, SearchQuery
 import datetime
 
 def home(request):
-    context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
+    recipe_list = Recipe.objects.order_by('like_count')[:4]
+    print(recipe_list)
+    context_dict = {'recipe_list' : recipe_list, 'boldmessage' : 'Whatever is in boldmessage in home views.py'}
+
     return render(request, 'recipes/home.html', context=context_dict)
+
 
 def my_account(request):
     if request.user.is_authenticated:
         user = request.user
         user_profile = UserProfile.objects.all()
         user_profile = UserProfile.objects.filter(user=user)
-        context_dict = {'user_profile':user_profile}
+        recipe_list = Recipe.objects.filter(user_id=user.id)
+        total_like = 0
+        for recipe in recipe_list:
+            total_like = total_like + recipe.like_count
+        context_dict = {'user_profile':user_profile, 'user_likes':total_like}
 
     else:
         #return HttpResponse("You can only view the My Account page if you are signed in. Please register or log in to view this page.")
@@ -204,7 +212,7 @@ def show_recipe(request, recipe_name_slug):
     recipe = Recipe.objects.get(slug=recipe_name_slug)
     context_dict['recipe'] = recipe
 
-    return render(request, 'recipes/recipes_test.html', context=context_dict)
+    return render(request, 'recipes/recipes.html', context=context_dict)
 
 def view_recipes(request):
     user = request.user

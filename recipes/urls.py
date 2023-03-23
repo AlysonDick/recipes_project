@@ -19,7 +19,7 @@ urlpatterns = [
     path('search/', views.search, name='search',),
     path("do_praise", views.do_praise, name="do_praise"),
     path('test/', views.test, name='test'),
-    path('recipes_test/<slug:recipe_name_slug>/', views.show_recipe, name='show_recipe'),
+    path('recipes/<slug:recipe_name_slug>/', views.show_recipe, name='show_recipe'),
     path('view_my_recipes/',views.view_recipes, name='view_my_recipes'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
 ]
