@@ -12,13 +12,15 @@ import datetime
 def home(request):
     context_dict = {'boldmessage' : 'Whatever is in boldmessage in home views.py'}
     #Search bar stuff
-    search_form=SearchQueryForm(request.POST)
     if request.method=='POST':
+        search_form=SearchQueryForm(request.POST)
+        print("jjjjj")
         if search_form.is_valid():
             f = search_form.save(commit=False)
             f.time = datetime.now()
             f.user = request.user
             f.save(commit=True)
+            print("test")
             return redirect('recipes:search')
     return render(request, 'recipes/home.html', context=context_dict)
 
@@ -43,8 +45,9 @@ def about(request):
     context_dict = {'about_message' : 'Whatever is in about_message in my_account views.py'}
     return render(request, 'recipes/about.html', context=context_dict)
 
+@login_required
 def search(request):
-    sq=SearchQuery.models.filter(user=request.user).order_by('-time')
+    sq=SearchQuery.objects.filter(User=request.user).order_by('-time')
     sqitem=sq[0]
     validRecipes = []
     recipesList = Recipe.objects.all()

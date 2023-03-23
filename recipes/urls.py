@@ -1,5 +1,8 @@
 from django.urls import path
 from recipes import views
+from recipes.views import search
+
+
 
 app_name = 'recipes'
 
