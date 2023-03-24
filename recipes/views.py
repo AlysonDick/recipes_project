@@ -32,7 +32,6 @@ def my_account(request):
         context_dict = {'user_profile':user_profile, 'user_likes':total_like}
 
     else:
-        #return HttpResponse("You can only view the My Account page if you are signed in. Please register or log in to view this page.")
         return render(request, 'recipes/register.html',)
 
     return render(request, 'recipes/my_account.html', context=context_dict)
@@ -51,23 +50,10 @@ def do_praise(request):
             return HttpResponse(json.dumps(resp), content_type="application/json")
 
         datas = json.loads(request.body)
-        print(datas)
         id = datas["id"]
         mtype = datas["mtype"]
-        print(id)
-        print(mtype)
         recipe = Recipe.objects.filter(id=id)
-        print(recipe)
         if len(recipe) == 0:
-            # r = Recipe()
-            # ca = Category()
-            # ca.category_name = "food"
-            # ca.save()
-            # r.user=user
-            # r.category = ca
-            # r.recipe_name = "recipe1"
-            # r.save()
-            # recipe = r
             resp = {"status": "2", "data": u"recipe had deleted"}
             return HttpResponse(json.dumps(resp), content_type="application/json")
         else:
@@ -120,12 +106,6 @@ def search(request):
         sq.time = datetime.datetime.now()
         sq.query = request.POST['search']
         sq.save()
-        #search_form=SearchQueryForm()
-        #if search_form.is_valid():
-            #f = search_form.save(commit=False)
-            #f.time = datetime.now()
-            #f.user = request.user
-            #f.save(commit=True)
 
     sq=SearchQuery.objects.order_by('-time')
     sqitem=sq.first()
@@ -220,13 +200,6 @@ def view_recipes(request):
     context_dict = {'recipe_list' : recipe_list, 'user_profile':user_profile}
 
     return render(request, 'recipes/view_my_recipes.html', context=context_dict)
-
-def test(request):
-    recipe_list = Recipe.objects.all()
-    print(recipe_list)
-    context_dict = {'recipe_list' : recipe_list}
-
-    return render(request, 'recipes/test.html', context=context_dict)
 
 def edit_profile(request):
     user_profile = request.user.userprofile
