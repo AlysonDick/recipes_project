@@ -50,11 +50,10 @@ class ViewsTests(TestCase):
         self.assertEqual(response.status_code,302)
     
     def test_CanCreateRecipeWhenLoggedIn(self):
-        #HOW TO FORCE LOGIN?
-        testUser=User.objects.get_or_create(username="test")
-        response=self.client.get(reverse('recipes:create_recipe'))
-        response.client.force_login(testUser, backend=None)
-        print(response.url)
+        response=self.client
+        testUser, created =User.objects.get_or_create(username="test")
+        response.force_login(testUser)
+        response=response.get(reverse('recipes:create_recipe'))
         self.assertEqual(response.status_code,200)
 
 

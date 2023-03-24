@@ -111,7 +111,6 @@ def about(request):
     context_dict = {'about_message' : 'Whatever is in about_message in my_account views.py'}
     return render(request, 'recipes/about.html', context=context_dict)
 
-@login_required
 def search(request):
     if request.method=='POST':
         print(request.POST['search'])
