@@ -17,7 +17,6 @@ import datetime
 def home(request):
     recipe_list = Recipe.objects.order_by('-like_count')[:4]
     context_dict = {'recipe_list' : recipe_list, 'boldmessage' : 'Whatever is in boldmessage in home views.py'}
-
     return render(request, 'recipes/home.html', context=context_dict)
 
 

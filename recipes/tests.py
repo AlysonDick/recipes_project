@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from recipes.models import UserProfile, Category, Recipe
+from recipes.models import UserProfile, Category, Recipe, User
 from django.db import IntegrityError
 from django.urls import reverse
 
@@ -27,32 +27,33 @@ class ModelsTests(TestCase):
         self.assertTrue(success)
     
     def test_CategoryNameMaxLengthIs30(self):
-        #---THIS DOESNT WORK FOR SOME REASON. CHECK.
         success=False
         print("Test 4")
         try:
             category = Category(category_name="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",)
+            category.full_clean(exclude=None, validate_unique=True, validate_constraints=True)
             category.save()
         except Exception as e:
             print(e)
             success=True
         self.assertTrue(success)
-        #self.assertTrue(True)
 
 class ViewsTests(TestCase):
-    def test_AboutPageContextExists(self):
-        response = self.client.get(reverse('recipes:about'))
+    def test_HomePageContextExists(self):
+        response = self.client.get(reverse('recipes:home'))
         self.assertEqual(response.status_code,200)
-        self.assertContains(response, "Whatever is in about_message in my_account views.py")
+        self.assertContains(response, 'Whatever is in boldmessage in home views.py')
+
 
     def test_RedirectCreateRecipeWithoutLoggingIn(self):
         response=self.client.get(reverse('recipes:create_recipe'))
-        print(response.url)
         self.assertEqual(response.status_code,302)
     
     def test_CanCreateRecipeWhenLoggedIn(self):
+        #HOW TO FORCE LOGIN?
+        testUser=User.objects.get_or_create(username="test")
         response=self.client.get(reverse('recipes:create_recipe'))
-        response.client.force_login(self.user)
+        response.client.force_login(testUser, backend=None)
         print(response.url)
         self.assertEqual(response.status_code,200)
 
