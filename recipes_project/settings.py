@@ -30,7 +30,7 @@ SECRET_KEY = '5fy8ds1cxyh^8!rxj^_j(k9uqctlngein+97=x4(fp-2pvgg7i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['alysonrecipes.pythonanywhere.com']
 
 
 # Application definition
